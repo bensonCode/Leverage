@@ -11,3 +11,5 @@ I think, therefore I am
 * 非金電期貨 XIF
 * 東證期貨 TJF
 * 印度50期貨 I5F
+* ETF期貨 ETF(自定)
+* 股票期貨 SX(自定)
