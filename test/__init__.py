@@ -1,7 +1,8 @@
 import scipy as sp
-import stockstats as ss
 import pymysql as psql
 import GlobalLib.Genv as env
+import pandas as pd
+import stockstats as ss
 
 # 打开数据库连接
 #db = psql.connect("localhost", "root", "benson1234", "TEST")
@@ -15,9 +16,20 @@ cursor = db.cursor()
 # print ("Database version : %s " % data)
 
 sql = "select * from employee"
-try:
-    cursor.execute(sql)
-    results = cursor.fetchall()
+df = pd.read_sql_query(sql,db)
+print(df)
+#cursor.execute(sql)
+#results = cursor.fetchall()
+#df = pd.DataFrame.from_records(results)
+#df.columns = cursor.keys()
+#print(df)
+stock = ss.StockDataFrame.from_records(df)
+
+print(stock)
+
+# 关闭数据库连接
+db.close()
+"""
     for row in results:
         fname = row[0]
         lname = row[1]
@@ -25,9 +37,4 @@ try:
         sex = row[3]
         income = row[4]
         print("fname=%s,lname=%s,age=%d,sex=%s,income=%d" % (fname, lname, age, sex, income))
-
-except:
-    print("error!!!")
-
-# 关闭数据库连接
-db.close()
+"""
